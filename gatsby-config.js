@@ -15,11 +15,27 @@ module.exports = {
       },
     },
     {
-      resolve: 'gatsby-plugin-i18n',
+      resolve: "gatsby-plugin-i18n",
       options: {
-        langKeyDefault: 'en',
-        useLangKeyLayout: false
-      }
+        langKeyDefault: "en",
+        useLangKeyLayout: false,
+        markdownRemark: {
+          postPage: "src/templates/blog-post.js",
+          query: `
+            {
+              allMarkdownRemark {
+                edges {
+                  node {
+                    fields {
+                      slug,
+                      langKey
+                    }
+                  }
+                }
+              }
+            }`,
+        },
+      },
     },
     {
       // keep as first gatsby-source-filesystem plugin for gatsby image support
